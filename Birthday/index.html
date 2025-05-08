@@ -19,15 +19,6 @@
       color: #ff69b4;
       font-size: 2rem;
     }
-    .upload-section {
-      margin: 30px 0;
-    }
-    img.uploaded-image {
-      max-width: 300px;
-      margin-top: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
     .btn {
       background-color: #ff69b4;
       color: white;
@@ -36,6 +27,13 @@
       font-size: 1rem;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 10px;
+    }
+    img {
+      max-width: 300px;
+      margin-top: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -45,42 +43,47 @@
   <h2>May your day be filled with joy and magic ✨</h2>
 
   <!-- Play Song Button -->
-  <button class="btn" onclick="playSong()">▶️ Play Birthday Song</button>
+  <button class="btn" onclick="playSong()">▶️ CLICK PANNI KELUDI🎶 </button>
+  <br/>
 
-  <!-- Upload Image Section -->
-  <div class="upload-section">
-    <p>Upload a special image for Priya:</p>
-    <input type="file" id="imageUpload" accept="image/*" />
-    <div id="imagePreview" style="display:none;">
-      <img id="uploadedImage" class="uploaded-image" src="" alt="Uploaded Image"/>
-    </div>
-  </div>
+  <img src="./Pictures/1614f500-b339-4bcb-909d-d63370cbffe6.webp" style="padding-top: 10px;">
 
-Audio Player (Hidden)
   <audio id="birthdaySong" loop>
-<source src="./Documents/Tholiya-En-Kadhaliya.mp3" type="audio/mp3">
-
+    <source src="./Documents/Birthday/Tholiya-En-Kadhaliya (mp3cut.net).mp3" type="audio/mp3">
     this one is for my tholi
   </audio>
+
+  <!-- Load Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
     function playSong() {
       const song = document.getElementById('birthdaySong');
       song.play();
-    }
 
-    document.getElementById('imageUpload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const uploadedImage = document.getElementById('uploadedImage');
-          uploadedImage.src = e.target.result;
-          document.getElementById('imagePreview').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+      // Blast confetti multiple times for a celebration feel
+      const duration = 5 * 1000; // 5 seconds
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
   </script>
 
 </body>
